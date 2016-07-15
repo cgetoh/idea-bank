@@ -1,0 +1,151 @@
+package kr.ac.itschool.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import kr.ac.itschool.gui.CalculatorClickListener;
+
+public class CalculatorDemoMain {
+
+ public static void main(String[] args) {
+	 JFrame frame = new JFrame("Java Calculator");
+	 frame.setLocation(800,300);
+	  frame.setPreferredSize(new Dimension(300,120));
+	  Container content = frame.getContentPane();
+	  JLabel label = new JLabel();
+	  JPanel panel = new JPanel();
+	  JTextField text1 = new JTextField(5);
+	  JTextField text2 = new JTextField(5);
+	  JTextField text3 = new JTextField(5);
+	  JLabel label1 = new JLabel(" ");;
+	  JLabel label2 = new JLabel("=");
+	  panel.add(text1);
+	  panel.add(label1);
+	  panel.add(text2);
+	  panel.add(label2);
+	  panel.add(text3);
+	  
+	  JButton Button1 = new JButton(" + ");
+	  JButton Button2 = new JButton(" - ");
+	  JButton Button3 = new JButton(" * ");
+	  JButton Button4 = new JButton(" / ");
+	  JButton restart = new JButton(" C ");
+	  JPanel panel1 = new JPanel();
+	  panel1.add(Button1);
+	  panel1.add(Button2);
+	  panel1.add(Button3);
+	  panel1.add(Button4);
+	  panel1.add(restart);
+	  
+	  content.add(label, BorderLayout.CENTER);
+	  content.add(panel,BorderLayout.CENTER);
+	  content.add(panel1,BorderLayout.SOUTH);
+	  
+	  ActionListener listener = new CalculatorClickListener(text1,text2, text3,label1,label2,Button1,Button2,Button3,Button4,restart);
+	  Button1.addActionListener(listener);
+	  Button2.addActionListener(listener);
+	  Button3.addActionListener(listener);
+	  Button4.addActionListener(listener);
+	  restart.addActionListener(listener);
+	  frame.pack();
+	  frame.setVisible(true);
+	  }
+}
+
+package kr.ac.itschool.gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class CalculatorClickListener implements  ActionListener  {
+	 private JTextField text1;
+	 private JTextField text2;
+	 private JTextField text3;
+	 private JLabel label1;
+	 private JLabel label2;
+	 private JButton button1;
+	 private JButton button2;
+	 private JButton button3;
+	 private JButton button4;
+	 private JButton restart;
+	 private JFrame frame = new JFrame("alert");
+	 CalculatorClickListener(JTextField text1, JTextField text2, JTextField text3,JLabel label1,JLabel label2, 
+			 JButton button1, JButton button2, JButton button3, JButton button4, JButton restart)
+	 {
+		 this.text1=text1;
+		 this.text2=text2;
+		  this.text3=text3;
+		  this.label1=label1;
+		  this.button1=button1;
+		  this.button2=button2;
+		  this.button3=button3;
+		  this.button4=button4;
+		  this.restart=restart;
+		  this.frame = frame;
+		  }
+	 public void actionPerformed(ActionEvent e) {
+		 int result= 0;
+		  String gettext=e.getActionCommand();
+		  boolean intchk = CheckNum(text1.getText());
+		  if(!intchk) {
+		   JOptionPane.showMessageDialog(frame, "num1을 입력하세요");
+		   return ;
+		   }
+		  intchk = CheckNum(text2.getText());
+		  if(!intchk) {
+		   JOptionPane.showMessageDialog(frame, "num2을 입력하세요");
+		   return ;
+		  }
+		  int a = Integer.parseInt (text1.getText());
+		  int b = Integer.parseInt (text2.getText());
+		  if(gettext.equals('/') && (b==0) ){
+		   JOptionPane.showMessageDialog (frame, "값이 올바르지 않습니다.");
+		  }
+		  if (gettext.equals(" + "))
+		   result = a+b;
+		  if (gettext.equals(" - "))
+		   result = a-b;
+		  if (gettext.equals(" * "))
+		   result = a*b;
+		  if (gettext.equals(" / "))
+		   result = a/b; 
+		  if (gettext.equals(" C "))
+		  {
+			   JOptionPane.showMessageDialog(frame, "다시 시도해 주세요");
+			  }
+			  String test = Integer.toString(result);
+			  text3.setText(test);
+			 }
+			  boolean CheckNum(String str){
+			   boolean intchk = false;
+			   try {
+			    Integer.parseInt(str);
+			    intchk = true;
+			   } catch (Exception e2) {
+			    System.out.println(e2.getMessage());
+			   }
+			   return intchk;
+		 }
+}
