@@ -1,0 +1,192 @@
+1.package kr.ac.itschool.entities;
+
+public class Member {
+	private String id;
+	private String name;
+	private String phone1;
+	private String phone2;
+	private String phone3;
+	private String post;
+	private String addr1;
+	private String addr2;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
+	public String getPost() {
+		return post;
+	}
+	public void setPost(String post) {
+		this.post = post;
+	}
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getCardno() {
+		return cardno;
+	}
+	public void setCardno(String cardno) {
+		this.cardno = cardno;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public String getInputdate() {
+		return inputdate;
+	}
+	public void setInputdate(String inputdate) {
+		this.inputdate = inputdate;
+	}
+	private String cardno;
+	private String job;
+	private String picture;
+	private String inputdate;
+
+}
+package kr.ac.itschool.practice;
+
+import java.util.ArrayList;
+
+import kr.ac.itschool.entities.Member;
+
+public class MemberArrayListDemo {
+	ArrayList<Member> memberListGet() {
+		ArrayList<Member> list= new ArrayList<Member>();
+		Member member= new Member();
+		member.setId("korea");
+		member.setName("이한국");
+		member.setAddr1("대전시 서구 용문동");
+		member.setAddr2("594-1번지");
+		member.setJob("개발자");
+		list.add(member);
+		
+		member= new Member();
+		member.setId("usa");
+		member.setName("박미국");
+		member.setAddr1("미국 캘리포니아주 la시");
+		member.setAddr2("에비뉴750");
+		member.setJob("CEO");
+		list.add(member);
+		
+		member= new Member();
+		member.setId("china");
+		member.setName("왕중국");
+		member.setAddr1("중국 길림성");
+		member.setAddr2("240");
+		member.setJob("영업");
+		list.add(member);
+		
+		return list;
+	}
+}
+package kr.ac.itschool.practice;
+
+import java.util.ArrayList;
+
+import kr.ac.itschool.entities.Member;
+
+public class MemberArrayListDemoMain {
+	public static void main (String args[]){
+		MemberArrayListDemo obj= new MemberArrayListDemo();
+		ArrayList<Member> list= obj.memberListGet();
+		Member data= null;
+		for (int i=0; i<list.size(); i++) {
+			data= new Member();
+			data= list.get(i);
+			System.out.print("id:"+data.getId()+" name:"+data.getName()+" addr:"+data.getAddr1()+" "+data.getAddr2());
+			System.out.println();
+		}
+	}
+}
+2.package kr.ac.itschool.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+public class WindowHelloMain {
+	
+	public static void main (String args[]){
+		JFrame frame= new JFrame("Hello Java");
+		frame.setLocation(500, 400);
+		frame.setPreferredSize(new Dimension(300,200));
+		Container contentpane= frame.getContentPane();
+		JTextField text= new JTextField("Hello");
+		JPanel panel= new JPanel();
+		JButton button1= new JButton("button1");
+		JButton button2= new JButton("button2");
+		panel.add(button1);
+		panel.add(button2);
+		JLabel label= new JLabel();
+		contentpane.add(text, BorderLayout.CENTER);
+		contentpane.add(panel, BorderLayout.SOUTH);
+		contentpane.add(label,BorderLayout.EAST);
+		ActionListener listener=  new WindowHelloClickListener();
+		button1.addActionListener(listener);
+		button2.addActionListener(listener);
+		frame.pack();
+		frame.setVisible(true);
+	}
+}
+package kr.ac.itschool.gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class WindowHelloClickListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("click!?");
+		}
+	}
